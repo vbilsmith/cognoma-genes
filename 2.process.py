@@ -2,7 +2,9 @@ import os
 import collections
 
 import pandas
-
+import warnings
+warnings.filterwarnings("ignore", message="numpy.dtype size changed")
+warnings.filterwarnings("ignore", message="numpy.ufunc size changed")
 
 def create_history_df(path):
     """
@@ -23,8 +25,8 @@ def create_history_df(path):
         pandas.read_table(path, compression='gzip', na_values='-')
         [list(renamer)]
         .rename(columns=renamer)
-        .query("tax_id == 9606")
-        .drop(['tax_id'], axis='columns')
+        #.query("tax_id == 9606")
+        #.drop(['tax_id'], axis='columns')
         .dropna(subset=['new_entrez_gene_id'])
         .sort_values('old_entrez_gene_id')
     )
@@ -45,8 +47,8 @@ def get_gene_info(path, renamer):
                           low_memory=False)
         [list(renamer)]
         .rename(columns=renamer)
-        .query("tax_id == 9606")
-        .drop(['tax_id'], axis='columns')
+        #.query("tax_id == 9606")
+        #.drop(['tax_id'], axis='columns')
         .sort_values('entrez_gene_id')
     )
 
@@ -101,7 +103,7 @@ def create_gene_xref_df(path):
     )
 
     # Rename columns before outputing
-    cols = ['entrez_gene_id', 'resource', 'identifier']
+    cols = ['entrez_gene_id', 'tax_id', 'resource', 'identifier']
     gene_df.columns = cols
     gene_df = (
         gene_df
@@ -192,7 +194,7 @@ if __name__ == '__main__':
     history_df.to_csv(path, index=False, sep='\t')
 
     # Genes data
-    info_path = os.path.join('download', 'Homo_sapiens.gene_info.gz')
+    info_path = os.path.join('download', 'All_Mammalia.gene_info.gz')
     gene_df = create_gene_df(info_path)
 
     path = os.path.join('data', 'genes.tsv')
