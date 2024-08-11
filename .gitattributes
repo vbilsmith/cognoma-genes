@@ -1,5 +1,8 @@
 *.gz filter=lfs diff=lfs merge=lfs -text
+<<<<<<< HEAD
 download/All_Mammalia.gene_info.gz filter=lfs diff=lfs merge=lfs -text
 data/chromosome-symbol-mapper.tsv filter=lfs diff=lfs merge=lfs -text
 data/genes-xrefs.tsv filter=lfs diff=lfs merge=lfs -text
+=======
+>>>>>>> parent of 52ae867 (run cognoma genes for all mammals)
 data/genes.tsv filter=lfs diff=lfs merge=lfs -text
