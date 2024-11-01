@@ -38,7 +38,7 @@ if __name__ == '__main__':
     # Specific files to download
     ftp_paths = [
         'gene/DATA/gene_history.gz',
-        'gene/DATA/GENE_INFO/Mammalia/Homo_sapiens.gene_info.gz',
+        'gene/DATA/GENE_INFO/Mammalia/All_Mammalia.gene_info.gz',
     ]
     versions = ncbi_ftp_download(ftp_paths, directory)
     
