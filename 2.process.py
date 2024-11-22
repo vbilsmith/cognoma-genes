@@ -2,9 +2,7 @@ import os
 import collections
 
 import pandas
-import warnings
-warnings.filterwarnings("ignore", message="numpy.dtype size changed")
-warnings.filterwarnings("ignore", message="numpy.ufunc size changed")
+
 
 def create_history_df(path):
     """
@@ -25,8 +23,8 @@ def create_history_df(path):
         pandas.read_table(path, compression='gzip', na_values='-')
         [list(renamer)]
         .rename(columns=renamer)
-        #.query("tax_id == 9606")
-        #.drop(['tax_id'], axis='columns')
+        .query("tax_id == 9606")
+        .drop(['tax_id'], axis='columns')
         .dropna(subset=['new_entrez_gene_id'])
         .sort_values('old_entrez_gene_id')
     )
