@@ -23,7 +23,7 @@ def create_history_df(path):
         pandas.read_table(path, compression='gzip', na_values='-')
         [list(renamer)]
         .rename(columns=renamer)
-        .query("tax_id == 9606")
+        .query("tax_id == 10116")
         .drop(['tax_id'], axis='columns')
         .dropna(subset=['new_entrez_gene_id'])
         .sort_values('old_entrez_gene_id')
@@ -45,7 +45,7 @@ def get_gene_info(path, renamer):
                           low_memory=False)
         [list(renamer)]
         .rename(columns=renamer)
-        #.query("tax_id == 9606")
+        .query("tax_id == 10116")
         #.drop(['tax_id'], axis='columns')
         .sort_values('entrez_gene_id')
     )
@@ -173,7 +173,7 @@ def get_chr_symbol_map(gene_df):
 
     map_df = (
         primary_df
-        .append(synonym_df)
+        .concat([synonym_df])
         .drop_duplicates(subset=['chromosome', 'symbol'], keep='first')
         .loc[:, ['symbol', 'chromosome', 'entrez_gene_id']]
         .sort_values(['symbol', 'chromosome'])
@@ -195,7 +195,7 @@ if __name__ == '__main__':
     info_path = os.path.join('download', 'All_Mammalia.gene_info.gz')
     gene_df = create_gene_df(info_path)
 
-    path = os.path.join('data', 'genes.tsv')
+    path = os.path.join('data', 'genes_rat.tsv')
     gene_df.to_csv(path, index=False, sep='\t')
 
     # Genes xref data
@@ -206,5 +206,5 @@ if __name__ == '__main__':
 
     # Chromosome-Symbol Map
     map_df = get_chr_symbol_map(gene_df)
-    path = os.path.join('data', 'chromosome-symbol-mapper.tsv')
+    path = os.path.join('data', 'chromosome-symbol-mapper_rat.tsv')
     map_df.to_csv(path, index=False, sep='\t')
