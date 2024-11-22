@@ -2,9 +2,7 @@ import os
 import collections
 
 import pandas
-import warnings
-warnings.filterwarnings("ignore", message="numpy.dtype size changed")
-warnings.filterwarnings("ignore", message="numpy.ufunc size changed")
+
 
 def create_history_df(path):
     """

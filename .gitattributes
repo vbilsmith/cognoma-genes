@@ -5,3 +5,5 @@ data/genes-xrefs.tsv filter=lfs diff=lfs merge=lfs -text
 data/genes.tsv filter=lfs diff=lfs merge=lfs -text
 data/genes_rat.tsv filter=lfs diff=lfs merge=lfs -text
 data/updater.tsv filter=lfs diff=lfs merge=lfs -text
+download/Homo_sapiens.gene_info.gz filter=lfs diff=lfs merge=lfs -text
+download/gene_history.gz filter=lfs diff=lfs merge=lfs -text
